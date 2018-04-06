@@ -1,1 +1,5 @@
 # Spam-Filter
+
+this is a spam filter that uses machine learning to classify emails as spam or ham. it uses the training data to train and then classifies the emails found in the testingData folder.
+
+Note: all emails used are avaliable publicly avalable online for free.
