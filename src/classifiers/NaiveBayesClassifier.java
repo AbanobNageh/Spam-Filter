@@ -39,8 +39,8 @@ public class NaiveBayesClassifier {
 		loadStopWordsList();
 	}
 	
+	// used to read any test data provided in 'batch mode' from file.
 	public void fit(){
-		// TODO: this fit function will be used to read any test data provided in 'batch mode' from file.
 		int itemsDone = 0, totalItems = 0;
 		System.out.println("starting to fit testing data.");
 		//readTestingData();
@@ -119,8 +119,8 @@ public class NaiveBayesClassifier {
 		System.out.println("percentage of predicted ham emails: " + (predictedHamEmails/hamEmails)*100);
 	}
 	
+	// used to fit the provided input and display its class.
 	public void fit(String input){
-		// TODO: this fit function will fit the provided input and display its class.
 		Email tempEmail = new Email(input);
 		ArrayList<Email> tempList = new ArrayList<Email>();
 		tempList.add(tempEmail);
@@ -165,9 +165,9 @@ public class NaiveBayesClassifier {
 		}
 	}
 	
+	// this is the learn function. it will have the Naive Bayes algorithm.
+	// it will read the training data from file.
 	public void learn(){
-		// TODO: this is the learn function. it will have the Naive Bayes algorithm.
-		// it will read the training data from file.
 		int itemsDone = 0, totalItems = 0;
 		
 		// read the training data and preprocess it.
@@ -250,11 +250,11 @@ public class NaiveBayesClassifier {
 		System.out.println("done learning");
 	}
 	
+	// this function will be used to preprocess an arrayList of emails.
+	// this function uses the 'Stanford corenlp' library to preprocess each email.
 	private void preprocess(ArrayList<Email> emails){
 		int emailsDone = 0, totalEmails = emails.size();
 		System.out.println("started preprocessing");
-		// TODO: this function will be used to preprocess an arrayList of emails.
-		// this function will use the 'Stanford corenlp' library to preprocess each email.
 		if (this.pipeline == null){
 			Properties props = new Properties();
 			props.put("annotators", "tokenize, ssplit, pos, lemma");
@@ -293,11 +293,8 @@ public class NaiveBayesClassifier {
 		System.out.println("done preprocessing");
 	}
 	
+	// used to read training emails from file and save each of them as an email class.
 	private void readTrainingData(){
-		// TODO: this function will be used to read training emails from file and save each of them as an email class.
-				// this function will use the second constructor in the Email class (the text and class name constructor).
-				// it will only be called once by the 'learn' function.
-				// it will save the data to the 'exampleEmails' array list.
 		System.out.println("starting to read training emails.");
 		String currentDirectory = Paths.get(".").toAbsolutePath().normalize().toString();
 		//String hamDirectory = currentDirectory + "\\trainingData\\ham";
@@ -351,11 +348,8 @@ public class NaiveBayesClassifier {
 		System.out.println("finished reading training emails.");
 	}
 	
+	// used to read testing emails from file and save each of them them as an email class.
 	private void readTestingData(){
-		// TODO: this function will be used to read testing emails from file and save each of them them as an email class.
-		// this function will use the first constructor in the Email class (the text only constructor).
-		// it will only be called once by the 'fit' function.
-		// it will save the data in the 'testEmails' array list.
 		String emailText;
 		try {
 			FileReader file = new FileReader("testingData.txt");
@@ -375,6 +369,7 @@ public class NaiveBayesClassifier {
 		}
 	}
 	
+	// used to read testing emails from file and save each of them them as an email class.
 	private void readTestingDataNew(){
 		System.out.println("starting to read testing emails.");
 		String currentDirectory = Paths.get(".").toAbsolutePath().normalize().toString();
