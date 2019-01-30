@@ -4,4 +4,4 @@ this is a spam filter that uses machine learning to classify emails as spam or h
 
 it uses the stanford core nlp library to process emails before classifing them.
 
-Note: all emails used are avaliable publicly avalable online for free.
+Note: all emails used are publicly avalable online for free.
