@@ -39,12 +39,15 @@ public class NaiveBayesClassifier {
 		loadStopWordsList();
 	}
 	
-	// used to read any test data provided in 'batch mode' from file.
+	/**
+	 * fit the testing data, prints the number of spam and ham emails and 
+	 * the overall accuracy.
+	 */
 	public void fit(){
 		int itemsDone = 0, totalItems = 0;
 		System.out.println("starting to fit testing data.");
 		//readTestingData();
-		readTestingDataNew();
+		readTestingData();
 		preprocess(this.testEmails);
 		
 		System.out.println("starting class prediction calculations.");
@@ -110,7 +113,8 @@ public class NaiveBayesClassifier {
 			}
 		}
 		
-		System.out.println("number of error emails: " + errors);
+		//System.out.println("number of error emails: " + errors);
+		System.out.println();
 		System.out.println("number of spam emails: " + spamEmails);
 		System.out.println("number of ham emails: " + hamEmails);
 		System.out.println("number of predicted spam emails: " + predictedSpamEmails);
@@ -119,7 +123,10 @@ public class NaiveBayesClassifier {
 		System.out.println("percentage of predicted ham emails: " + (predictedHamEmails/hamEmails)*100);
 	}
 	
-	// used to fit the provided input and display its class.
+	/**
+	 * fits a single email, prints that this is either spam or ham.
+	 * @param input the email to fit as a string.
+	 */
 	public void fit(String input){
 		Email tempEmail = new Email(input);
 		ArrayList<Email> tempList = new ArrayList<Email>();
@@ -165,13 +172,14 @@ public class NaiveBayesClassifier {
 		}
 	}
 	
-	// this is the learn function. it will have the Naive Bayes algorithm.
-	// it will read the training data from file.
+	/**
+	 * learns from the training data, this is done by reading the emails and preprocessing it then
+	 * the spam and ham probability for each word is calculated.
+	 */
 	public void learn(){
 		int itemsDone = 0, totalItems = 0;
 		
 		// read the training data and preprocess it.
-		//readTrainingData();
 		System.out.println("started learning");
 		readTrainingData();
 		preprocess(this.exampleEmails);
@@ -250,8 +258,11 @@ public class NaiveBayesClassifier {
 		System.out.println("done learning");
 	}
 	
-	// this function will be used to preprocess an arrayList of emails.
-	// this function uses the 'Stanford corenlp' library to preprocess each email.
+	/**
+	 * preprocess emails by using the stanford corenlp library, this is done by removing stop words 
+	 * and changing the words in the emails to their dictionary form (lemmatization).
+	 * @param emails an arraylist of email object that contains the emails to be preprocessed.
+	 */
 	private void preprocess(ArrayList<Email> emails){
 		int emailsDone = 0, totalEmails = emails.size();
 		System.out.println("started preprocessing");
@@ -293,7 +304,9 @@ public class NaiveBayesClassifier {
 		System.out.println("done preprocessing");
 	}
 	
-	// used to read training emails from file and save each of them as an email class.
+	/**
+	 * loads training data.
+	 */
 	private void readTrainingData(){
 		System.out.println("starting to read training emails.");
 		String currentDirectory = Paths.get(".").toAbsolutePath().normalize().toString();
@@ -348,29 +361,10 @@ public class NaiveBayesClassifier {
 		System.out.println("finished reading training emails.");
 	}
 	
-	// used to read testing emails from file and save each of them them as an email class.
+	/**
+	 * loads testing data.
+	 */
 	private void readTestingData(){
-		String emailText;
-		try {
-			FileReader file = new FileReader("testingData.txt");
-			BufferedReader read = new BufferedReader(file);
-			
-			while ((emailText = read.readLine()) != null){
-				emailText = emailText.trim();
-				Email testingEmail = new Email(emailText);
-				this.testEmails.add(testingEmail);
-			}
-			
-			read.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// used to read testing emails from file and save each of them them as an email class.
-	private void readTestingDataNew(){
 		System.out.println("starting to read testing emails.");
 		String currentDirectory = Paths.get(".").toAbsolutePath().normalize().toString();
 		//String hamDirectory = currentDirectory + "\\trainingData\\ham";
@@ -424,6 +418,9 @@ public class NaiveBayesClassifier {
 		System.out.println("finished reading testing emails.");
 	}
 	
+	/**
+	 * used to load the list of stop words from file.
+	 */
 	private void loadStopWordsList(){
 		String stopWord;
 		try {
@@ -442,3 +439,4 @@ public class NaiveBayesClassifier {
 			e.printStackTrace();
 		}
 	}
+}
