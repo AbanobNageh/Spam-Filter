@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SpamFilterMain",
+            "request": "launch",
+            "mainClass": "main.SpamFilterMain",
+            "projectName": "Spam Filter",
+            "console": "externalTerminal"
+        }
+    ]
+}
